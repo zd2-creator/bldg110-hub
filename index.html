@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ועד בית · בניין 110 — כל הטפסים</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="🏢 ועד בית בניין 110 — כל הטפסים">
+<meta property="og:description" content="כל ההצבעות והטפסים של הבניין במקום אחד">
+<meta name="theme-color" content="#1D9E75">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+  body { font-family:'Heebo',Arial,sans-serif; direction:rtl; color:#333; line-height:1.6;
+         background:linear-gradient(180deg,#eef7f3 0,#f5f5f5 300px); min-height:100vh; }
+  .wrap { max-width:620px; margin:0 auto; padding:22px 16px 60px; }
+  .hero { text-align:center; padding:16px 8px 20px; }
+  .hero .b { display:inline-block; background:#fff; border:1px solid #d6e9df; color:#0d6e52; font-size:12.5px; font-weight:700; padding:5px 14px; border-radius:999px; margin-bottom:12px; }
+  .hero h1 { font-size:25px; font-weight:800; letter-spacing:-.4px; margin-bottom:4px; }
+  .hero p { color:#666; font-size:14px; }
+
+  .card { background:#fff; border:1px solid #e2e2e2; border-radius:14px; margin-bottom:14px; overflow:hidden;
+          box-shadow:0 6px 20px -14px rgba(0,0,0,.2); transition:transform .15s, box-shadow .15s; }
+  .card.live:hover { transform:translateY(-2px); box-shadow:0 10px 26px -14px rgba(0,0,0,.28); }
+  .c-top { display:flex; align-items:flex-start; gap:12px; padding:16px 18px 12px; }
+  .c-ic { font-size:26px; flex-shrink:0; line-height:1.2; }
+  .c-ttl { flex:1; min-width:0; }
+  .c-ttl h2 { font-size:16.5px; font-weight:800; margin-bottom:2px; }
+  .c-ttl .sub { font-size:12.5px; color:#888; }
+  .pill { font-size:11px; font-weight:800; padding:4px 10px; border-radius:999px; white-space:nowrap; flex-shrink:0; }
+  .p-open { background:#e0f5ee; color:#0d6e52; }
+  .p-closed { background:#eceded; color:#7c8380; }
+
+  .c-body { padding:0 18px 14px; }
+  .bar { height:12px; background:#eee; border-radius:8px; overflow:hidden; display:flex; }
+  .bar i { display:block; height:100%; transition:width .6s; }
+  .b-yes { background:linear-gradient(90deg,#1D9E75,#5cc79b); }
+  .b-no { background:#e8a49b; }
+  .stats { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; margin-top:8px; font-size:12.5px; color:#777; }
+  .stats b { color:#0d6e52; font-size:14px; }
+  /* תג התוצאה — תמיד באותו מקום: קצה שמאל של השורה שמתחת לפס ההתקדמות */
+  .res { font-size:11.5px; font-weight:800; padding:3px 10px; border-radius:999px; white-space:nowrap; display:none; }
+  .res.on { display:inline-block; }
+  .r-win { background:#e0f5ee; color:#0d6e52; }
+  .r-fail { background:#fdecea; color:#c0392b; }
+  .r-prog { background:#fdefd2; color:#8a5a00; }
+  .chips { display:flex; gap:6px; flex-wrap:wrap; margin-top:9px; }
+  .chip { font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:7px; }
+  .ch-y { background:#e0f5ee; color:#0d6e52; } .ch-n { background:#fdecea; color:#c0392b; }
+  .ch-w { background:#f5f5f5; color:#999; } .ch-t { background:#fff8ec; color:#8a5a00; }
+
+  .c-act { display:flex; border-top:1px solid #f0f0f0; }
+  .c-act a { flex:1; text-align:center; padding:12px 8px; font-size:13.5px; font-weight:700; text-decoration:none; color:#0d6e52; transition:background .15s; }
+  .c-act a:hover { background:#f4faf7; }
+  .c-act a + a { border-inline-start:1px solid #f0f0f0; }
+  .c-act a.adm { color:#8a5a00; display:none; }
+  body.admin .c-act a.adm { display:block; }
+
+  .card.ended { opacity:.85; }
+  .card.ended:not(.win) .b-yes { background:linear-gradient(90deg,#7d9c92,#a8bfb7); }
+  .sk { color:#bbb; font-size:12.5px; padding:4px 0; }
+  .adm-bar { display:flex; align-items:center; gap:10px; justify-content:center; margin:6px 0 18px; flex-wrap:wrap; }
+  .adm-btn { background:#fff; border:1px solid #e0c088; color:#8a5a00; border-radius:999px; padding:8px 18px; font-size:12.5px; font-weight:700; font-family:inherit; cursor:pointer; }
+  .adm-btn:hover { background:#fff8ec; }
+  body.admin .adm-btn.on { background:#8a5a00; color:#fff; border-color:#8a5a00; }
+  .foot { text-align:center; color:#aaa; font-size:11.5px; margin-top:24px; line-height:1.8; }
+</style>
+<style id="gateCss">
+.bgate{position:fixed;inset:0;background:linear-gradient(180deg,#eef7f3,#f5f5f5);display:flex;align-items:center;justify-content:center;z-index:99999;padding:20px;font-family:'Heebo',Arial,sans-serif;direction:rtl}
+.bgate-box{background:#fff;border-radius:16px;padding:34px 28px;width:100%;max-width:360px;text-align:center;border:1px solid #d6e9df;box-shadow:0 12px 40px -18px rgba(0,0,0,.25)}
+.bgate-box .ic{font-size:44px;margin-bottom:10px}
+.bgate-box h2{font-size:18px;font-weight:800;margin:0 0 6px;color:#333}
+.bgate-box p{font-size:13.5px;color:#666;margin:0 0 18px;line-height:1.6}
+.bgate-box input{width:100%;padding:12px;border:1.5px solid #ccc;border-radius:8px;font-size:18px;text-align:center;letter-spacing:1px;margin-bottom:12px;font-family:inherit}
+.bgate-box input:focus{outline:none;border-color:#1D9E75}
+.bgate-box button{width:100%;padding:12px;background:#1D9E75;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.bgate-box button:disabled{background:#aaa}
+.bgate-err{color:#c0392b;font-size:13px;margin-top:10px;display:none}
+.bgate-rem{font-size:11.5px;color:#999;margin-top:12px}
+</style>
+<script id="BLDG_GATE">
+/* ── שער כניסה אחיד לכל טפסי הבניין ──
+   הסיסמה נבדקת בשרת (GATE_ALL ב-Script Properties) ונשמרת במכשיר.
+   מפתח משותף: הזנה אחת פותחת את כל הטפסים. */
+(function(){
+  var KEY = 'bldg110_gate', FORM = 'שדרוגים';
+  var API = 'https://script.google.com/macros/s/';
+  var G = ''; try { G = localStorage.getItem(KEY) || ''; } catch(e) {}
+  window.BLDG_GATE = { get: function(){ return G; } };
+
+  function isApi(u){ return String(u).indexOf(API) === 0; }
+
+  /* כל קריאה לשרת נושאת אוטומטית את הסיסמה; תשובת gated מחזירה את מסך הכניסה */
+  var of = window.fetch;
+  window.fetch = function(u, o){
+    try {
+      if (G && isApi(u)) {
+        if (o && o.method === 'POST' && typeof o.body === 'string') {
+          var b = JSON.parse(o.body); b.gate = G;
+          o = Object.assign({}, o, { body: JSON.stringify(b) });
+        } else {
+          u = u + (String(u).indexOf('?') > -1 ? '&' : '?') + 'gate=' + encodeURIComponent(G);
+        }
+      }
+    } catch(e) {}
+    var pr = of(u, o);
+    if (isApi(u)) {
+      pr.then(function(r){
+        try { r.clone().json().then(function(d){
+          if (d && d.status === 'gated') { G = ''; try { localStorage.removeItem(KEY); } catch(e) {} show('הסיסמה השתנתה — הזינו שוב'); }
+        }).catch(function(){}); } catch(e) {}
+      }).catch(function(){});
+    }
+    return pr;
+  };
+
+  function show(msg){
+    if (document.getElementById('bgate')) return;
+    var d = document.createElement('div');
+    d.className = 'bgate'; d.id = 'bgate';
+    d.innerHTML = '<div class="bgate-box"><div class="ic">🔒</div>' +
+      '<h2>טופס לדיירי הבניין בלבד</h2>' +
+      '<p>הזינו את הסיסמה שקיבלתם בקבוצת הוואטסאפ</p>' +
+      '<input id="bgIn" placeholder="סיסמה" autocomplete="off" />' +
+      '<button id="bgBtn">כניסה</button>' +
+      '<div class="bgate-err" id="bgErr"></div>' +
+      '<div class="bgate-rem">✓ נזכור אותך במכשיר — פעם אחת לכל הטפסים</div></div>';
+    (document.body || document.documentElement).appendChild(d);
+    var err = document.getElementById('bgErr');
+    if (msg) { err.textContent = msg; err.style.display = 'block'; }
+    var inp = document.getElementById('bgIn'), btn = document.getElementById('bgBtn');
+    setTimeout(function(){ try { inp.focus(); } catch(e) {} }, 100);
+    function go(){
+      var v = inp.value.trim(); if (!v) return;
+      btn.disabled = true; btn.textContent = 'בודק…';
+      var base = (typeof SCRIPT_URL !== 'undefined' && SCRIPT_URL) ? SCRIPT_URL : 'https://script.google.com/macros/s/AKfycbxn7f1-PycwsK8oh9uElLX_L6pe_bCwP7cg64k5YM97ybZ0GTssn3p5ziJX-vb47yVW/exec';
+      of(base + '?action=gateCheck&form=' + encodeURIComponent(FORM) + '&gate=' + encodeURIComponent(v))
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          if (d.status === 'ok') { try { localStorage.setItem(KEY, v); } catch(e) {} location.reload(); }
+          else { err.textContent = '❌ סיסמה שגויה'; err.style.display = 'block'; btn.disabled = false; btn.textContent = 'כניסה'; }
+        })
+        .catch(function(){ err.textContent = 'שגיאה בחיבור — נסו שוב'; err.style.display = 'block'; btn.disabled = false; btn.textContent = 'כניסה'; });
+    }
+    btn.onclick = go;
+    inp.onkeydown = function(ev){ if (ev.key === 'Enter') go(); };
+  }
+  window.BLDG_GATE.show = show;
+  if (!G) { if (document.body) show(); else document.addEventListener('DOMContentLoaded', function(){ show(); }); }
+})();
+</script>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <span class="b">🏢 ועד בית · בניין 110</span>
+    <h1>כל הטפסים במקום אחד</h1>
+    <p>מצב עדכני של כל ההצבעות והאישורים</p>
+  </div>
+
+  <div class="adm-bar">
+    <button class="adm-btn" id="admBtn" onclick="toggleAdmin()">🔑 מצב ניהול</button>
+  </div>
+
+  <div id="cards"></div>
+
+  <div class="foot">נציגות ועד בית בניין 110 · יעל רום 6, ראשון לציון<br>הנתונים מתעדכנים אוטומטית</div>
+</div>
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxn7f1-PycwsK8oh9uElLX_L6pe_bCwP7cg64k5YM97ybZ0GTssn3p5ziJX-vb47yVW/exec';
+const TOTAL = 52;
+
+// ═══ רשימת הטפסים — טופס חדש = שורה אחת כאן ═══
+// ═══ רשימת הטפסים — הכי חדש למעלה ═══
+// טופס חדש = מוסיפים אותו בראש הרשימה (added = תאריך יצירה, לתיעוד)
+const FORMS = [
+  { key:'פרוטוקול', ic:'🏦', title:'אישור פתיחת חשבון בנק', sub:'פרוטוקול אסיפה 7.9.26 · בחתימה', added:'2026-09-07',
+    url:'https://zd2-creator.github.io/bldg110-protocol/', admin:'https://zd2-creator.github.io/bldg110-protocol/admin.html',
+    yes:'', no:'', target:35, gate:true },
+  { key:'שדרוגים',  ic:'🗳️', title:'הצבעת חבילת שדרוגים', sub:'עד 3,000 ₪ לדירה · 6 תשלומים', added:'2026-09-02',
+    url:'https://zd2-creator.github.io/bldg110-upgrades/', admin:'https://zd2-creator.github.io/bldg110-upgrades/admin.html',
+    yes:'בעד', no:'נגד', target:35 },
+  { key:'מעלית', ic:'🛗', title:'סקר מעלית שבת', sub:'באילו קומות תעצור', added:'2026-06-29',
+    url:'https://zd2-creator.github.io/shabbat-elevator/', admin:'https://zd2-creator.github.io/shabbat-elevator/admin.html',
+    legacy:'progress' },
+  { key:'הצבעות', ic:'🏗️', title:'בחירת חברת בדק', sub:'לעד הנדסה / כהן הנדסה', added:'2026-05-13',
+    url:'https://zd2-creator.github.io/bldg110-vote/vote.html', admin:'https://zd2-creator.github.io/bldg110-vote/vote-admin.html',
+    yes:'laad', no:'cohen', yesLbl:'לעד', noLbl:'כהן', legacy:'stats2', target:35, ended:true },
+  { key:'חותמים', ic:'✍️', title:'אישור נציגות זמנית', sub:'חתימות בעלי הדירות', added:'2026-04-27',
+    url:'https://zd2-creator.github.io/bldg110/', admin:'https://zd2-creator.github.io/bldg110/admin.html',
+    legacy:'stats', target:35 },
+];
+
+function esc(v){ return String(v==null?'':v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// מצב ניהול — נשמר במכשיר, רק מגלה קישורים (לא נותן גישה; האדמין עצמו מוגן בסיסמה)
+function toggleAdmin(){
+  const on = !document.body.classList.contains('admin');
+  document.body.classList.toggle('admin', on);
+  document.getElementById('admBtn').classList.toggle('on', on);
+  document.getElementById('admBtn').textContent = on ? '🔑 מצב ניהול פעיל' : '🔑 מצב ניהול';
+  try { on ? localStorage.setItem('hub_admin','1') : localStorage.removeItem('hub_admin'); } catch(e) {}
+}
+try { if (localStorage.getItem('hub_admin')) toggleAdmin(); } catch(e) {}
+
+function card(f){
+  const yesLbl = f.yesLbl || f.yes || 'נרשמו';
+  return '<div class="card live" id="card_' + esc(f.key) + '">' +
+    '<div class="c-top"><span class="c-ic">' + f.ic + '</span>' +
+      '<div class="c-ttl"><h2>' + esc(f.title) + '</h2><div class="sub">' + esc(f.sub) + '</div></div>' +
+      '<span class="pill p-open" id="pill_' + esc(f.key) + '">טוען…</span></div>' +
+    '<div class="c-body">' +
+      '<div class="bar"><i class="b-yes" id="by_' + esc(f.key) + '" style="width:0%"></i><i class="b-no" id="bn_' + esc(f.key) + '" style="width:0%"></i></div>' +
+      '<div class="stats"><span id="st_' + esc(f.key) + '" class="sk">טוען נתונים…</span><span class="res" id="tg_' + esc(f.key) + '"></span></div>' +
+      '<div class="chips" id="ch_' + esc(f.key) + '"></div>' +
+    '</div>' +
+    '<div class="c-act">' +
+      '<a href="' + esc(f.url) + '" target="_blank">פתיחת הטופס ↗</a>' +
+      '<a class="adm" href="' + esc(f.admin) + '" target="_blank">🔑 ניהול ↗</a>' +
+    '</div></div>';
+}
+
+document.getElementById('cards').innerHTML = FORMS.filter(f => !f.hidden).map(card).join('');
+
+function setCard(f, d){
+  const k = f.key, id = s => document.getElementById(s + '_' + k);
+  let voted = 0, yes = 0, no = 0;
+  if (f.legacy === 'progress') { voted = d.count || 0; yes = d.wantCount || 0; no = d.noCount || 0; }
+  else if (f.legacy === 'stats') { voted = (d.apts || []).length; yes = voted; }
+  else if (f.legacy === 'stats2') { const m = d.aptMap || {}; const v = Object.keys(m); voted = v.length; yes = v.filter(a => m[a] === f.yes).length; no = v.filter(a => m[a] === f.no).length; }
+  else { const rows = d.rows || []; const m = {}; rows.forEach(r => { const n = parseInt(r.apt); if (!isNaN(n)) m[n] = String(r.choice || ''); });
+         const v = Object.keys(m); voted = v.length; yes = f.yes ? v.filter(a => m[a] === f.yes).length : voted; no = f.no ? v.filter(a => m[a] === f.no).length : 0; }
+
+  id('by').style.width = Math.round(yes / TOTAL * 100) + '%';
+  id('bn').style.width = Math.round(no / TOTAL * 100) + '%';
+  const pct = Math.round(voted / TOTAL * 100);
+  id('st').className = ''; id('st').innerHTML = '<b>' + voted + '</b> / ' + TOTAL + ' דירות (' + pct + '%)';
+
+  // ═══ מודל סטטוס אחיד ═══
+  // 1. ה-pill למעלה  = מצב הטופס בלבד:  פתוח / הסתיים
+  // 2. התג מתחת לפס  = סטטוס הרוב בלבד: עוד N לרוב / הושג רוב / לא הושג רוב
+  // 3. הדדליין        = צ'יפ בשורת הצ'יפים (מידע נלווה — לא סטטוס)
+  const dl = d.deadline;
+  const ended = !!(f.ended || dl === 'closed' || (dl && dl !== 'open' && new Date() > new Date(dl)));
+  const majority = !!(f.target && yes >= f.target);
+
+  const chips = [];
+  if (f.yes) { chips.push('<span class="chip ch-y">' + esc(f.yesLbl || f.yes) + ' ' + yes + '</span>');
+               if (f.no) chips.push('<span class="chip ch-n">' + esc(f.noLbl || f.no) + ' ' + no + '</span>'); }
+  else chips.push('<span class="chip ch-y">אישרו ' + yes + '</span>');
+  chips.push('<span class="chip ch-w">טרם ' + (TOTAL - voted) + '</span>');
+  if (!ended && dl && dl !== 'open' && dl !== 'closed') {
+    const t = new Date(dl), days = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+    if (!isNaN(t.getTime())) chips.push('<span class="chip ch-t">🗓️ עד יום ' + days[t.getDay()] + ' ' + t.getDate() + '.' + (t.getMonth()+1) + '</span>');
+  }
+  if (f.gate) chips.push('<span class="chip ch-t">🔒 דורש סיסמה</span>');
+  id('ch').innerHTML = chips.join('');
+
+  // ה-pill מציג תמיד ורק את מצב הטופס
+  const pill = id('pill');
+  pill.className = 'pill ' + (ended ? 'p-closed' : 'p-open');
+  pill.textContent = ended ? 'הסתיים' : 'פתוח';
+
+  // התג מציג תמיד ורק את סטטוס הרוב — באותו מקום בכל הכרטיסים
+  const res = id('tg');
+  if (!f.target)     { res.className = 'res';           res.textContent = ''; }
+  else if (majority) { res.className = 'res on r-win';  res.textContent = '🎉 הושג רוב · ' + yes + '/' + f.target; }
+  else if (ended)    { res.className = 'res on r-fail'; res.textContent = 'לא הושג רוב · ' + yes + '/' + f.target; }
+  else               { res.className = 'res on r-prog'; res.textContent = 'עוד ' + (f.target - yes) + ' לרוב'; }
+
+  const cardEl = document.getElementById('card_' + k);
+  cardEl.classList.toggle('ended', ended);
+  cardEl.classList.toggle('win', majority);
+}
+
+FORMS.filter(f => !f.hidden).forEach(f => {
+  const CK = 'hub_' + f.key;
+  try { const c = JSON.parse(localStorage.getItem(CK) || 'null'); if (c) setCard(f, c); } catch(e) {}
+  let url;
+  if (f.legacy === 'progress') url = SCRIPT_URL + '?action=progress';
+  else if (f.legacy === 'stats') url = SCRIPT_URL + '?action=stats';
+  else if (f.legacy === 'stats2') url = SCRIPT_URL + '?action=stats&sheet=' + encodeURIComponent(f.key);
+  else url = SCRIPT_URL + '?action=formStats&form=' + encodeURIComponent(f.key);
+  fetch(url).then(r => r.json()).then(d => {
+    if (d.status !== 'ok') return;
+    try { localStorage.setItem(CK, JSON.stringify(d)); } catch(e) {}
+    setCard(f, d);
+  }).catch(() => {});
+});
+</script>
+</body>
+</html>
