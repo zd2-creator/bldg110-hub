@@ -178,7 +178,7 @@ const TOTAL = 52;
 const FORMS = [
   { key:'פרוטוקול', ic:'🏦', title:'אישור פתיחת חשבון בנק', sub:'פרוטוקול אסיפה 7.9.26 · בחתימה', added:'2026-09-07',
     url:'https://zd2-creator.github.io/bldg110-protocol/', admin:'https://zd2-creator.github.io/bldg110-protocol/admin.html',
-    yes:'', no:'', target:35, gate:true },
+    yes:'', no:'', target:35 },
   { key:'שדרוגים',  ic:'🗳️', title:'הצבעת חבילת שדרוגים', sub:'עד 3,000 ₪ לדירה · 6 תשלומים', added:'2026-09-02',
     url:'https://zd2-creator.github.io/bldg110-upgrades/', admin:'https://zd2-creator.github.io/bldg110-upgrades/admin.html',
     yes:'בעד', no:'נגד', target:35 },
@@ -255,7 +255,7 @@ function setCard(f, d){
     const t = new Date(dl), days = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
     if (!isNaN(t.getTime())) chips.push('<span class="chip ch-t">🗓️ עד יום ' + days[t.getDay()] + ' ' + t.getDate() + '.' + (t.getMonth()+1) + '</span>');
   }
-  if (f.gate) chips.push('<span class="chip ch-t">🔒 דורש סיסמה</span>');
+
   id('ch').innerHTML = chips.join('');
 
   // ה-pill מציג תמיד ורק את מצב הטופס
