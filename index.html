@@ -38,6 +38,9 @@
   .bar i { display:block; height:100%; transition:width .6s; }
   .b-yes { background:linear-gradient(90deg,#1D9E75,#5cc79b); }
   .b-no { background:#e8a49b; }
+  /* neutral:true — בחירה בין שתי אפשרויות שוות (לא בעד/נגד): צבע לכל אפשרות */
+  .card.neutral .b-yes { background:linear-gradient(90deg,#2563eb,#6d9af3); } .card.neutral .b-no { background:#b7a3ee; }
+  .card.neutral .ch-y { background:#e8effc; color:#2563eb; } .card.neutral .ch-n { background:#efe8fd; color:#7c3aed; }
   .stats { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; margin-top:8px; font-size:12.5px; color:#777; }
   .stats b { color:#0d6e52; font-size:14px; }
   /* תג התוצאה — תמיד באותו מקום: קצה שמאל של השורה שמתחת לפס ההתקדמות */
@@ -211,6 +214,9 @@ const TOTAL = 52;
 // ═══ רשימת הטפסים — הכי חדש למעלה ═══
 // טופס חדש = מוסיפים אותו בראש הרשימה (added = תאריך יצירה, לתיעוד)
 const FORMS = [
+  { key:'ניהול', ic:'🏢', title:'בחירת חברת ניהול', sub:'נת״מ Newmark או נ.עליון אחזקות · עד 3.10', added:'2026-09-23',
+    url:'https://zd2-creator.github.io/bldg110-management/', admin:'https://zd2-creator.github.io/bldg110-management/admin.html',
+    yes:'נת״מ Newmark', no:'נ.עליון אחזקות', target:35, neutral:true },
   { key:'פרוטוקול', ic:'🏦', title:'אישור פתיחת חשבון בנק', sub:'פרוטוקול אסיפה 7.9.26 · בחתימה', added:'2026-09-07',
     url:'https://zd2-creator.github.io/bldg110-protocol/', admin:'https://zd2-creator.github.io/bldg110-protocol/admin.html',
     yes:'', no:'', target:35 },
@@ -234,7 +240,7 @@ try { localStorage.removeItem('hub_admin'); } catch(e) {}
 
 function card(f){
   const yesLbl = f.yesLbl || f.yes || 'נרשמו';
-  return '<div class="card live" id="card_' + esc(f.key) + '">' +
+  return '<div class="card live' + (f.neutral ? ' neutral' : '') + '" id="card_' + esc(f.key) + '">' +
     '<div class="c-top"><span class="c-ic">' + f.ic + '</span>' +
       '<div class="c-ttl"><h2>' + esc(f.title) + '</h2><div class="sub">' + esc(f.sub) + '</div></div>' +
       '<span class="pill p-open" id="pill_' + esc(f.key) + '">טוען…</span></div>' +
@@ -271,7 +277,10 @@ function setCard(f, d){
   // 3. הדדליין        = צ'יפ בשורת הצ'יפים (מידע נלווה — לא סטטוס)
   const dl = d.deadline;
   const ended = !!(f.ended || dl === 'closed' || (dl && dl !== 'open' && new Date() > new Date(dl)));
-  const majority = !!(f.target && yes >= f.target);
+  // neutral: הרוב נמדד לכל אפשרות בנפרד — מספיק שאחת מגיעה ליעד
+  const lead = f.neutral ? Math.max(yes, no) : yes;
+  const leadName = f.neutral ? (no > yes ? (f.noLbl || f.no) : (f.yesLbl || f.yes)) : '';
+  const majority = !!(f.target && lead >= f.target);
 
   const chips = [];
   if (f.yes) { chips.push('<span class="chip ch-y">' + esc(f.yesLbl || f.yes) + ' ' + yes + '</span>');
@@ -293,9 +302,9 @@ function setCard(f, d){
   // התג מציג תמיד ורק את סטטוס הרוב — באותו מקום בכל הכרטיסים
   const res = id('tg');
   if (!f.target)     { res.className = 'res';           res.textContent = ''; }
-  else if (majority) { res.className = 'res on r-win';  res.textContent = '🎉 הושג רוב · ' + yes + '/' + f.target; }
-  else if (ended)    { res.className = 'res on r-fail'; res.textContent = 'לא הושג רוב · ' + yes + '/' + f.target; }
-  else               { res.className = 'res on r-prog'; res.textContent = 'עוד ' + (f.target - yes) + ' לרוב'; }
+  else if (majority) { res.className = 'res on r-win';  res.textContent = '🎉 הושג רוב · ' + (f.neutral ? leadName : lead + '/' + f.target); }
+  else if (ended)    { res.className = 'res on r-fail'; res.textContent = 'לא הושג רוב · ' + lead + '/' + f.target; }
+  else               { res.className = 'res on r-prog'; res.textContent = 'עוד ' + (f.target - lead) + ' לרוב'; }
 
   const cardEl = document.getElementById('card_' + k);
   cardEl.classList.toggle('ended', ended);
