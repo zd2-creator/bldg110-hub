@@ -216,7 +216,7 @@ const TOTAL = 52;
 const FORMS = [
   { key:'ניהול', ic:'🏢', title:'בחירת חברת ניהול', sub:'נת״מ Newmark או נ.עליון אחזקות · עד 3.10', added:'2026-09-23',
     url:'https://zd2-creator.github.io/bldg110-management/', admin:'https://zd2-creator.github.io/bldg110-management/admin.html',
-    yes:'נת״מ Newmark', no:'נ.עליון אחזקות', target:35, neutral:true },
+    yes:'נת״מ Newmark', no:'נ.עליון אחזקות', target:24, total:47, neutral:true },
   { key:'פרוטוקול', ic:'🏦', title:'אישור פתיחת חשבון בנק', sub:'פרוטוקול אסיפה 7.9.26 · בחתימה', added:'2026-09-07',
     url:'https://zd2-creator.github.io/bldg110-protocol/', admin:'https://zd2-creator.github.io/bldg110-protocol/admin.html',
     yes:'', no:'', target:35 },
@@ -259,6 +259,7 @@ document.getElementById('cards').innerHTML = FORMS.filter(f => !f.hidden).map(ca
 
 function setCard(f, d){
   const k = f.key, id = s => document.getElementById(s + '_' + k);
+  const T = f.total || TOTAL;   // total: מכנה שונה מ-52 (למשל דירות שטרם נמכרו)
   let voted = 0, yes = 0, no = 0;
   if (f.legacy === 'progress') { voted = d.count || 0; yes = d.wantCount || 0; no = d.noCount || 0; }
   else if (f.legacy === 'stats') { voted = (d.apts || []).length; yes = voted; }
@@ -266,10 +267,10 @@ function setCard(f, d){
   else { const rows = d.rows || []; const m = {}; rows.forEach(r => { const n = parseInt(r.apt); if (!isNaN(n)) m[n] = String(r.choice || ''); });
          const v = Object.keys(m); voted = v.length; yes = f.yes ? v.filter(a => m[a] === f.yes).length : voted; no = f.no ? v.filter(a => m[a] === f.no).length : 0; }
 
-  id('by').style.width = Math.round(yes / TOTAL * 100) + '%';
-  id('bn').style.width = Math.round(no / TOTAL * 100) + '%';
-  const pct = Math.round(voted / TOTAL * 100);
-  id('st').className = ''; id('st').innerHTML = '<b>' + voted + '</b> / ' + TOTAL + ' דירות (' + pct + '%)';
+  id('by').style.width = Math.round(yes / T * 100) + '%';
+  id('bn').style.width = Math.round(no / T * 100) + '%';
+  const pct = Math.round(voted / T * 100);
+  id('st').className = ''; id('st').innerHTML = '<b>' + voted + '</b> / ' + T + ' דירות (' + pct + '%)';
 
   // ═══ מודל סטטוס אחיד ═══
   // 1. ה-pill למעלה  = מצב הטופס בלבד:  פתוח / הסתיים
@@ -286,7 +287,7 @@ function setCard(f, d){
   if (f.yes) { chips.push('<span class="chip ch-y">' + esc(f.yesLbl || f.yes) + ' ' + yes + '</span>');
                if (f.no) chips.push('<span class="chip ch-n">' + esc(f.noLbl || f.no) + ' ' + no + '</span>'); }
   else chips.push('<span class="chip ch-y">אישרו ' + yes + '</span>');
-  chips.push('<span class="chip ch-w">טרם ' + (TOTAL - voted) + '</span>');
+  chips.push('<span class="chip ch-w">טרם ' + (T - voted) + '</span>');
   if (!ended && dl && dl !== 'open' && dl !== 'closed') {
     const t = new Date(dl), days = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
     if (!isNaN(t.getTime())) chips.push('<span class="chip ch-t">🗓️ עד יום ' + days[t.getDay()] + ' ' + t.getDate() + '.' + (t.getMonth()+1) + '</span>');
